@@ -7,7 +7,7 @@ class ProductPage(BasePage):
     def add_product_to_basket(self):
         add_to_basket_button = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
         add_to_basket_button.click()
-        self.solve_quiz_and_get_code()
+        # self.solve_quiz_and_get_code()
 
     def should_be_message_about_product(self, product_name):
         assert self.is_element_present(*ProductPageLocators.PRODUCT_ADDED_MESSAGE), 'Message about product not found'
@@ -22,3 +22,10 @@ class ProductPage(BasePage):
 
     def get_product_price(self):
         return self.get_element_text(*ProductPageLocators.PRODUCT_PRICE)
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_be_disappeared_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE)
